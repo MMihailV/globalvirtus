@@ -33,7 +33,7 @@ public class UserController {
 }
 */
 
-/*
+
 import java.util.List;
 
 import com.jdriven.ng2boot.domain.User;
@@ -88,4 +88,4 @@ public class UserController {
         userService.deleteUser(Integer.parseInt(id));
         return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
     }
-}*/
+}
