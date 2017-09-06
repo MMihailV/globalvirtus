@@ -8,6 +8,8 @@ import com.jdriven.ng2boot.domain.User;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
+
 @Transactional
 @Repository
 public class UserDAO implements IUserDAO {
@@ -44,9 +46,16 @@ public class UserDAO implements IUserDAO {
     }
     @Override
     public boolean userExists(Long id, String firstName, String lastName, String email, String login, String password, Long FK_Role) {
-        String hql = "FROM User as usr WHERE usr.firstName = ? and usr.lastName = ?";
+        String hql = "FROM User as usr WHERE usr.firstName = firstName and usr.lastName = lastName";
         int count = entityManager.createQuery(hql).setParameter('0', id).setParameter('1', firstName)
                 .setParameter('2', lastName).setParameter('3', email).setParameter('4', login).setParameter('5', password).setParameter('6', FK_Role).getResultList().size();
+        return count > 0 ? true : false;
+    }
+    @Override
+    public boolean userExists(String login, String password) {
+        String hql = "FROM User as usr WHERE usr.login = login and usr.password = password";
+        int count = entityManager.createQuery(hql).setParameter('1', login)
+                .setParameter('2', password).getResultList().size();
         return count > 0 ? true : false;
     }
 }

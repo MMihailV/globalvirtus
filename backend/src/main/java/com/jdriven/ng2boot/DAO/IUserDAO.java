@@ -11,4 +11,5 @@ public interface IUserDAO {
     void updateUser(User user);
     void deleteUser(int userId);
     boolean userExists(Long id, String firstName, String lastName, String email, String login, String password, Long FK_Role);
+    boolean userExists(String login, String password);
 }

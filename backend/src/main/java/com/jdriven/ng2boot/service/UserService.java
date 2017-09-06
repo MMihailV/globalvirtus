@@ -24,6 +24,16 @@ public class UserService implements IUserService {
         return userDAO.getAllUsers();
     }
 
+    /*@Override
+    public boolean getUserByLogin(String login, String password) {
+        if (userDAO.userExists(login, password)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }*/
+
     @Override
     public synchronized boolean createUser(User user){
         if (userDAO.userExists(user.getId(), user.getFirstName(), user.getLastName(), user.getEmail(),

@@ -11,10 +11,20 @@ import { HomeComponent } from './home/home.component';
 import { DragulaModule } from 'ng2-dragula';
 import { UserService } from './user/user.service';
 import { UserComponent } from './user/user.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+
+// used to create fake backend
+//import { fakeBackendProvider } from './helpers/fake-backend';
+import { MockBackend, MockConnection } from '@angular/http/testing';
+import { BaseRequestOptions } from '@angular/http';
+
+import { AuthGuard } from './guards/index';
+import { AuthenticationService } from './services/index';
 
 @NgModule({
   declarations: [
     AppComponent,
+    DashboardComponent,
     LoginComponent,
     HomeComponent,
     UserComponent
@@ -28,7 +38,15 @@ import { UserComponent } from './user/user.component';
     ReactiveFormsModule
   ],
   providers: [
-    UserService
+    UserService,
+
+    AuthGuard,
+    AuthenticationService,
+
+    // providers used to create fake backend
+   // fakeBackendProvider,
+    MockBackend,
+    BaseRequestOptions
   ],
   bootstrap: [AppComponent]
 })

@@ -21,7 +21,7 @@ export class UserComponent implements OnInit {
     firstName: new FormControl('', Validators.required),
     lastName: new FormControl('', Validators.required),
     email: new FormControl('', Validators.required),
-    login: new FormControl('', Validators.required),
+    username: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
     fkRole: new FormControl('', Validators.required)
   });
@@ -40,7 +40,7 @@ export class UserComponent implements OnInit {
         errorCode =>  this.statusCode = errorCode);
   }
   //Handle create and update user
-  onUserFormSubmit() {
+ /* onUserFormSubmit() {
     this.processValidation = true;
     if (this.userForm.invalid) {
       return; //Validation failed, exit from method.
@@ -50,12 +50,12 @@ export class UserComponent implements OnInit {
     let firstName = this.userForm.get('firstName').value.trim();
     let lastName = this.userForm.get('lastName').value.trim();
     let email = this.userForm.get('email').value.trim();
-    let login = this.userForm.get('login').value.trim();
+    let login = this.userForm.get('username').value.trim();
     let password = this.userForm.get('password').value.trim();
     let fkRole = this.userForm.get('fkRole').value.trim();
     if (this.userIdToUpdate === null) {
       //Handle create user
-      let user = new User (null, firstName, lastName, email, login, password, fkRole);
+      let user = new User (null, username, password, email, firstName, lastName, fkRole);
       this.userService.createUser(user)
         .subscribe(successCode => {
             this.statusCode = successCode;
@@ -65,7 +65,7 @@ export class UserComponent implements OnInit {
           errorCode => this.statusCode = errorCode);
     } else {
       //Handle update user
-      let user = new User(this.userIdToUpdate, firstName, lastName, email, login, password, fkRole);
+      let user = new User(this.userIdToUpdate, username, password, email, firstName, lastName, fkRole);
       this.userService.updateUser(user)
         .subscribe(successCode => {
             this.statusCode = successCode;
@@ -74,19 +74,19 @@ export class UserComponent implements OnInit {
           },
           errorCode => this.statusCode = errorCode);
     }
-  }
+  }*/
   //Load user by id to edit
-  loadUserToEdit(userId: string) {
+  /*loadUserToEdit(userId: string) {
     this.preProcessConfigurations();
     this.userService.getUserById(userId)
       .subscribe(user => {
           this.userIdToUpdate = user.userId;
-          this.userForm.setValue({ firstName: user.firstName, lastName: user.lastName, email: user.email, logon: user.login, password: user.password, fkRole: user.fkRole });
+          this.userForm.setValue({ username: user.username, password: user.password, email: user.email, firstName: user.firstName, lastName: user.lastName, fkRole: user.fkRole });
           this.processValidation = true;
           this.requestProcessing = false;
         },
         errorCode =>  this.statusCode = errorCode);
-  }
+  }*/
   //Delete user
   deleteUser(userId: string) {
     this.preProcessConfigurations();

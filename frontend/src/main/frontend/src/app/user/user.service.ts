@@ -37,6 +37,18 @@ export class UserService {
       .map(this.extractData)
       .catch(this.handleError);
   }
+  //Fetch user by login and password
+  getUserByLogin(login: string, password: string): Observable<boolean> {
+    let url = "http://localhost:8080/authenticate/login";
+    let cpHeaders = new Headers({ 'Content-Type': 'application/json' });
+    let cpParams = new URLSearchParams();
+    cpParams.set('login', login);
+    cpParams.set('password', password);
+    let options = new RequestOptions({ headers: cpHeaders, params: cpParams });
+    return this.http.get(url, options)
+      .map(this.extractData)
+      .catch(this.handleError);
+  }
   //Update user
   updateUser(user: User):Observable<number> {
     let cpHeaders = new Headers({ 'Content-Type': 'application/json' });
