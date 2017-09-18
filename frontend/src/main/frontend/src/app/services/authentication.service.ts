@@ -59,9 +59,8 @@ export class AuthenticationService {
     return this.http.post(url, body, {headers:headers})
       .map((response: Response) => {
         // login successful if there's a jwt token in the response
-        //let token = response.json() && response.json().token;
-        let token = 'fake-jwt-token';
-        if (response.statusText) {
+        let token = response.json() && response.json().token;
+        if (token != '') {
           // set token property
           this.token = token;
 
@@ -82,14 +81,5 @@ export class AuthenticationService {
     // clear token remove user from local storage to log user out
     this.token = null;
     localStorage.removeItem('currentUser');
-  }
-
-  private extractData(res: Response) {
-    let body = res.json();
-    return body;
-  }
-  private handleError (error: Response | any) {
-    console.error(error.message || error);
-    return Observable.throw(error.status);
   }
 }

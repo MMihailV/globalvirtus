@@ -8,7 +8,7 @@ public interface IUserService {
     List<User> getAllUsers();
     User getUserById(int userId);
     boolean createUser(User user);
-    boolean getUserByLogin(String login, String password);
+    String getUserByLogin(String login, String password);
     void updateUser(User user);
     void deleteUser(int userId);
 }

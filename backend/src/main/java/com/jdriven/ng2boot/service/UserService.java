@@ -1,5 +1,6 @@
 package com.jdriven.ng2boot.service;
 
+import java.security.SecureRandom;
 import java.util.List;
 
 import com.jdriven.ng2boot.DAO.IUserDAO;
@@ -9,6 +10,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserService implements IUserService {
+
+    static final String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    static SecureRandom rnd = new SecureRandom();
 
     @Autowired
     private IUserDAO userDAO;
@@ -25,13 +29,13 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public boolean getUserByLogin(String login, String password) {
+    public String getUserByLogin(String login, String password) {
 
         if (userDAO.userExists(login, password)) {
-            return true;
+            return tokenGeneration();
         }
         else {
-            return false;
+            return "";
         }
     }
 
@@ -53,5 +57,13 @@ public class UserService implements IUserService {
     @Override
     public void deleteUser(int userId) {
         userDAO.deleteUser(userId);
+    }
+
+    private String tokenGeneration() {
+        int len = 21;
+        StringBuilder sb = new StringBuilder( len );
+        for( int i = 0; i < len; i++ )
+            sb.append( AB.charAt( rnd.nextInt(AB.length()) ) );
+        return sb.toString();
     }
 }
