@@ -10,6 +10,6 @@ public interface IUserDAO {
     void createUser(User user);
     void updateUser(User user);
     void deleteUser(int userId);
-    boolean userExists(Long id, String firstName, String lastName, String email, String login, String password, Long FK_Role);
+    boolean userExists(User user);
     boolean userExists(String login, String password);
 }

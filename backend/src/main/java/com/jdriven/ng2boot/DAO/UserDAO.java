@@ -45,10 +45,10 @@ public class UserDAO implements IUserDAO {
         entityManager.remove(getUserById(userId));
     }
     @Override
-    public boolean userExists(Long id, String firstName, String lastName, String email, String login, String password, Long FK_Role) {
-        String hql = "FROM User as usr WHERE usr.firstName = firstName and usr.lastName = lastName";
-        int count = entityManager.createQuery(hql).setParameter('0', id).setParameter('1', firstName)
-                .setParameter('2', lastName).setParameter('3', email).setParameter('4', login).setParameter('5', password).setParameter('6', FK_Role).getResultList().size();
+    public boolean userExists(User user) {
+        String hql = "FROM User as usr WHERE usr.login = ? or usr.email = ?";
+        int count = entityManager.createQuery(hql).setParameter(Integer.parseInt("1"), user.getLogin())
+                .setParameter(Integer.parseInt("2"), user.getEmail()).getResultList().size();
         return count > 0 ? true : false;
     }
     @Override

@@ -82,4 +82,27 @@ export class AuthenticationService {
     this.token = null;
     localStorage.removeItem('currentUser');
   }
+
+  create(username: string, email: string, password: string): Observable<boolean> {
+    let url = 'http://localhost:8080/registration/create';
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    let urlSearchParams = new URLSearchParams();
+    urlSearchParams.append('username', username);
+    urlSearchParams.append('email', email);
+    urlSearchParams.append('password', password);
+    let body = urlSearchParams.toString()
+
+    return this.http.post(url, body, {headers:headers})
+      .map((response: Response) => {
+
+        if (response.status == 205) {
+          // return true to indicate successful registration
+          return true;
+        } else {
+          // return false to indicate failed registration
+          return false;
+        }
+      });
+  }
 }

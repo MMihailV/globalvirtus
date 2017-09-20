@@ -40,9 +40,17 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public synchronized boolean createUser(User user){
-        if (userDAO.userExists(user.getId(), user.getFirstName(), user.getLastName(), user.getEmail(),
-                user.getLogin(), user.getPassword(), user.getFK_Role())) {
+    public synchronized boolean createUser(String login, String email, String password){
+        User user = new User();
+        user.setId(null);
+        user.setLogin(login);
+        user.setEmail(email);
+        user.setPassword(password);
+        user.setFirstName("");
+        user.setLastName("");
+        user.setFK_Role(1L);
+
+        if (userDAO.userExists(user)) {
             return false;
         } else {
             userDAO.createUser(user);

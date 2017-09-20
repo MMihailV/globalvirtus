@@ -37,4 +37,17 @@ export class LoginComponent implements OnInit {
         }
       });
   }
+
+  create() {
+    this.loading = true;
+    this.authenticationService.create(this.model.username, this.model.email, this.model.password)
+      .subscribe(result => {
+        if (result === true) {
+          this.router.navigate(['/login#tologin']);
+        } else {
+          this.error = 'Username or email is exists';
+          this.loading = false;
+        }
+      });
+  }
 }

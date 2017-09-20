@@ -70,7 +70,7 @@ public class UserController {
     }
     @PostMapping("article")
     public ResponseEntity<Void> createUser(@RequestBody User user, UriComponentsBuilder builder) {
-        boolean flag = userService.createUser(user);
+        boolean flag = userService.createUser(user.getLogin(), user.getEmail(), user.getPassword());
         if (flag == false) {
             return new ResponseEntity<Void>(HttpStatus.CONFLICT);
         }
