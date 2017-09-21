@@ -69,7 +69,6 @@ public class YouTubeExample {
      */
     public static Credential authorize() throws Exception {
         // Load client secrets.
-        //InputStream in = YouTubeExample.class.getResourceAsStream("c:\\Users\\Yury\\.credentials\\java-youtube-api-tests\\client_secret.json");
         InputStream in = new FileInputStream("c:\\Users\\Yury\\.credentials\\java-youtube-api-tests\\client_secret.json");
         GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader( in ));
 
