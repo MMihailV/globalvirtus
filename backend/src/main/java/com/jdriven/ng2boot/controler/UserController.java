@@ -54,7 +54,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.UriComponentsBuilder;
 @Controller
 @RequestMapping("user")
-@CrossOrigin(origins = {"http://localhost:4200/#/"})
+//@CrossOrigin(origins = {"http://localhost:4200/#/"})
+@CrossOrigin
 public class UserController {
     @Autowired
     private IUserService userService;

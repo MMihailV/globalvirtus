@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("registration")
-@CrossOrigin(origins = {"http://localhost:4200/#/"})
+//@CrossOrigin(origins = {"http://localhost:4200/#/"})
+@CrossOrigin
 public class RegistrationController {
 
     @Autowired
