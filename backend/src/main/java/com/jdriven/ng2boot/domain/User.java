@@ -28,6 +28,9 @@ public class User {
     @Column(nullable = false)
     private Long FK_Role;
 
+    @Column
+    private String logo;
+
     public Long getId() {
         return id;
     }
@@ -83,5 +86,9 @@ public class User {
     public void setFK_Role(Long FK_Role) {
         this.FK_Role = FK_Role;
     }
+
+    public String getLogo() { return logo; }
+
+    public void setLogo(String logo) { this.logo = logo; }
     // setters and getters
 }

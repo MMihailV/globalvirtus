@@ -24,12 +24,18 @@ public class UserService implements IUserService {
     }
 
     @Override
+    public User getUserByLogin(String login) {
+        User obj = userDAO.getUserByLogin(login);
+        return obj;
+    }
+
+    @Override
     public List<User> getAllUsers(){
         return userDAO.getAllUsers();
     }
 
     @Override
-    public String getUserByLogin(String login, String password) {
+    public String isUserExist(String login, String password) {
 
         if (userDAO.userExists(login, password)) {
             return tokenGeneration();
@@ -49,6 +55,7 @@ public class UserService implements IUserService {
         user.setFirstName("");
         user.setLastName("");
         user.setFK_Role(1L);
+       // user.setLogo(null);
 
         if (userDAO.userExists(user)) {
             return false;

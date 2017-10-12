@@ -41,16 +41,10 @@ import com.jdriven.ng2boot.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 @Controller
 @RequestMapping("user")
@@ -59,9 +53,9 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class UserController {
     @Autowired
     private IUserService userService;
-    @GetMapping("article")
-    public ResponseEntity<User> getUserById(@RequestParam("id") String id) {
-        User user = userService.getUserById(Integer.parseInt(id));
+    @GetMapping("user")
+    public ResponseEntity<User> getUserByLogin(@RequestParam("login") String login) {
+        User user = userService.getUserByLogin(login);
         return new ResponseEntity<User>(user, HttpStatus.OK);
     }
     @GetMapping("all-articles")

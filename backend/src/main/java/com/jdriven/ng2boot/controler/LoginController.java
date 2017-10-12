@@ -26,7 +26,7 @@ public class LoginController {
             @RequestParam(value="username") String username,
             @RequestParam(value="password")String password
     ) {
-        String token = userService.getUserByLogin(username, password);
+        String token = userService.isUserExist(username, password);
         final HttpHeaders httpHeaders= new HttpHeaders();
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
         if (!token.equals("")) return new ResponseEntity<String>("{\"token\": \"" + token + "\"}", httpHeaders, HttpStatus.OK);

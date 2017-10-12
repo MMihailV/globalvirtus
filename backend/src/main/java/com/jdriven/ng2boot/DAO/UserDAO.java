@@ -19,6 +19,15 @@ public class UserDAO implements IUserDAO {
     public User getUserById(int userId) {
         return entityManager.find(User.class, userId);
     }
+    @Override
+    public User getUserByLogin(String login) {
+
+        String hql = "FROM User as usr WHERE usr.login = ?";
+        List<User> users = entityManager.createQuery(hql).setParameter(Integer.parseInt("1"), login).getResultList();
+        if (users.size() == 1) return users.get(0);
+        return new User();
+
+    }
     @SuppressWarnings("unchecked")
     @Override
     public List<User> getAllUsers() {

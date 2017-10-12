@@ -26,7 +26,7 @@ import java.util.HashMap;
 import java.util.List;
 
 
-public class YouTubeExample {
+public class GetVideoExample {
 
     /** Application name. */
     private static final String APPLICATION_NAME = "API Sample";
@@ -67,8 +67,9 @@ public class YouTubeExample {
      * @return an authorized Credential object.
      * @throws IOException
      */
-    public static Credential authorize() throws Exception {
+    public static Credential authorize() throws IOException {
         // Load client secrets.
+        //InputStream in = GetVideoExample.class.getResourceAsStream("/client_secret.json");
         InputStream in = new FileInputStream("c:\\Users\\Yury\\.credentials\\java-youtube-api-tests\\client_secret.json");
         GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader( in ));
 
@@ -78,8 +79,13 @@ public class YouTubeExample {
                 .setDataStoreFactory(DATA_STORE_FACTORY)
                 .setAccessType("offline")
                 .build();
-        Credential credential = new AuthorizationCodeInstalledApp(
-                flow, new LocalServerReceiver()).authorize("user");
+        Credential credential = null;
+        try {
+            credential = new AuthorizationCodeInstalledApp(
+                    flow, new LocalServerReceiver()).authorize("user");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         System.out.println(
                 "Credentials saved to " + DATA_STORE_DIR.getAbsolutePath());
         return credential;
@@ -91,7 +97,7 @@ public class YouTubeExample {
      * @return an authorized API client service
      * @throws IOException
      */
-    public static YouTube getYouTubeService() throws Exception {
+    public static YouTube getYouTubeService() throws IOException {
         Credential credential = authorize();
         return new YouTube.Builder(
                 HTTP_TRANSPORT, JSON_FACTORY, credential)
@@ -99,21 +105,21 @@ public class YouTubeExample {
                 .build();
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws IOException {
 
         YouTube youtube = getYouTubeService();
 
         try {
             HashMap<String, String> parameters = new HashMap<>();
             parameters.put("part", "snippet,contentDetails,statistics");
-            parameters.put("id", "UCMCgOm8GZkHp8zJ6l7_hIuA");
+            parameters.put("id", "Ks-_Mh1QhMc");
 
-            YouTube.Channels.List channelsListByIdRequest = youtube.channels().list(parameters.get("part").toString());
+            YouTube.Videos.List videosListByIdRequest = youtube.videos().list(parameters.get("part").toString());
             if (parameters.containsKey("id") && parameters.get("id") != "") {
-                channelsListByIdRequest.setId(parameters.get("id").toString());
+                videosListByIdRequest.setId(parameters.get("id").toString());
             }
 
-            ChannelListResponse response = channelsListByIdRequest.execute();
+            VideoListResponse response = videosListByIdRequest.execute();
             System.out.println(response);
 
 
